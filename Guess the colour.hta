@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess The Colour</title>
+    <hta:application id="oApp" innerborder="no" scroll="no" windowstate="normal">
+<style>
+    body {
+      background-color: #f0f0f0;
+      font-family: sans-serif;
+    }
+    #colorSquare {
+      width: 100px;
+      height: 100px;
+      background-color: #cccccc;
+      margin-top: 15px;
+      border: 1px solid #000000;
+    }
+</style>
+</head>
+<body onload="VBScript:SetupGame()">
+
+<h1>Colour game</h1>
+
+<input type="text" id="lname" name="lname"><br><br>
+<button onclick="VBScript:CheckAnswer()">Submit Guess</button><br><br>
+<button onclick="VBScript:SetupGame()">New Color</button><br><br>
+
+<div id="colorSquare"></div>
+
+<script language="VBScript">
+    Dim secretColorName
+
+    Sub SetupGame()
+        Dim userColor
+        Randomize
+        userColor = Int((8 - 1 + 1) * Rnd + 1)
+        
+        If userColor = 1 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#FF0000"
+            secretColorName = "red"
+        End If
+        If userColor = 2 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#0000FF"
+            secretColorName = "blue"
+        End If
+        If userColor = 3 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#00FF00"
+            secretColorName = "green"
+        End If
+        If userColor = 4 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#00FFFF"
+            secretColorName = "cyan"
+        End If
+        If userColor = 5 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#FFFF00"
+            secretColorName = "yellow"
+        End If
+        If userColor = 6 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#FF00FF"
+            secretColorName = "magenta"
+        End If
+        If userColor = 7 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#800080"
+            secretColorName = "purple"
+        End If
+        If userColor = 8 Then
+            document.getElementById("colorSquare").style.backgroundColor = "#FFA500"
+            secretColorName = "orange"
+        End If
+        
+        document.getElementById("lname").value = ""
+    End Sub
+
+    Sub CheckAnswer()
+        Dim answer
+        answer = LCase(Trim(document.getElementById("lname").value))
+        
+        If answer = secretColorName Then
+            MsgBox "Correct"
+            SetupGame()
+        Else
+            MsgBox "Wrong"
+        End If
+    End Sub
+</script>
+
+</body>
+</html>
